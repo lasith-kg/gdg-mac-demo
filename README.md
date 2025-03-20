@@ -16,7 +16,10 @@ gdg-mac-demo/
 │   ├── src/                # Source code directory
 │   │   └── index.js        # API server code
 │   ├── package.json        # Node.js dependencies
+│   └── .dockerignore       # Fiiles to ignore when performing a COPY
 │   └── Dockerfile          # Backend container definition
+├── database/               # Postgres configuration
+│   ├── *.sql               # All files matching *.sql will be executed during database init
 ├── docker compose.yml      # Container orchestration
 ├── .gitignore              # Git ignore patterns for all components
 └── README.md               # Project documentation
@@ -37,7 +40,7 @@ gdg-mac-demo/
 
 2. Start the containers:
    ```bash
-   docker compose up -d --build
+   docker compose up --build
    ```
 
 3. Access the application:
@@ -103,4 +106,12 @@ docker volume ls
 
 # Stop and remove all containers, networks, and volumes
 docker compose down -v
+
+# Build a backend container and temporarily access it through a SSH session
+cd backend
+docker build . -t todos-backend
+docker run -it --entrypoint /bin/sh --rm todos-backend
+
+# [Mac Only] Perform a TCP ping on arbituary port 
+nc -vz localhost <tcp:port>
 ``` 

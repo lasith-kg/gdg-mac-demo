@@ -1,26 +1,9 @@
 services:
   # Frontend service
-  frontend:
-    build: ./frontend
-    ports:
-      - "8080:80"
-    depends_on:
-      - backend
+  # frontend:
 
   # Backend service
-  backend:
-    build: ./backend
-    ports:
-      - "9000:9000"
-    environment:
-      - PGUSER=postgres
-      - PGHOST=database
-      - PGDATABASE=todos    # Connect directly to todos database
-      - PGPASSWORD=postgres
-      - PGPORT=5432
-    depends_on:
-      database:
-        condition: service_healthy  # Wait for the DB health check to pass
+  # backend:
 
   # Database service
   database:
